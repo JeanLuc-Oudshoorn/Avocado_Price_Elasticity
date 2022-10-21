@@ -78,3 +78,21 @@ plt.xlabel("Change in Price (%)")
 plt.ylabel("Change in Volume (%)")
 plt.savefig('price_elasticity_fit.png', dpi=150)
 plt.show()
+
+# Plot profitability
+# 1.) Let's imagine the base selling price of an avocado is €1.40, of which €0.65 is profit, production cost is fixed
+price_perc_change = np.linspace(start=-40, stop=40, num=200)
+
+profit_per_avocado = 1.40*(1+(price_perc_change/100)) - 0.75
+volume_at_price = (g*price_perc_change**2 + s*price_perc_change)/100 + 1
+profit_at_volume = (profit_per_avocado*volume_at_price/0.65)*100 - 100
+
+plt.grid(visible=True)
+plt.plot(price_perc_change, profit_at_volume)
+plt.suptitle("Percent Change in Sales Price vs. Total Profit")
+plt.title("(Assume Price: €1.40, Profit: €0.65, Fixed Production Cost)")
+plt.xlabel("Change in Sale Price (%)")
+plt.ylabel("Change in Total Profit(%)")
+plt.savefig('profit_optimization.png')
+plt.show()
+plt.clf()
